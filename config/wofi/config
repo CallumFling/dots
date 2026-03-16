@@ -1,0 +1,14 @@
+show=drun
+width=550
+height=400
+always_parse_args=true
+show_all=false
+allow_images=true
+term=ghostty
+hide_scroll=true
+print_command=true
+insensitive=true
+location=center
+prompt=search
+columns=1
+font=FiraCode Nerd Font Ret 12

@@ -1,0 +1,8 @@
+[pyprland]
+plugins = [
+    "fetch_client_menu",
+    "workspaces_follow_focus",
+]
+
+[workspaces_follow_focus]
+max_workspaces = 9

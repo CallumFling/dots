@@ -1,0 +1,235 @@
+[{
+    "output": ["Dell Inc. DELL P3424WE FG8Z5T3", "Samsung Electric Company C27HG7x HTNK700263", "eDP-1"],
+    "modules-left": ["custom/os_button","custom/separator#dot-line", "hyprland/workspaces", "custom/separator#dot-line", "idle_inhibitor", "custom/check-wireguard"],
+    "modules-center": ["clock"],
+    "margin": "0 0 0 0",
+    "reload_style_on_change": true,
+    "modules-right": ["group/expand", "custom/separator#dot-line", "cpu", "memory", "custom/disk", "temperature", "group/expandVol", "pulseaudio", "battery", "network", "power-profiles-daemon", "custom/notification"],
+
+    // Used as a nice graphical divider
+    "custom/separator#dot-line": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "urgent": "",
+            "active": "", // focused workspace on current monitor
+            "visible": "", // focused workspace on other monitors
+            "default": "",
+            "empty": "" // persistent (created by this plugin)
+        },
+        "all-outputs": false,
+        "active-only": true,
+        "persistent-workspaces": {
+             "*": 6
+       }
+    },
+
+    "custom/os_button": {
+        "format": "",
+        "tooltip": false
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "custom/expand": {
+            "format": "",
+            "tooltip": false
+    },
+
+    "custom/expandVol": {
+            "format": "",
+            "tooltip": false
+            // "on-click":
+    },
+
+    "group/expand": {
+            "orientation": "horizontal",
+            "drawer": {
+                "transition-duration": 600,
+                "transition-to-left": true,
+                "click-to-reveal": false
+            },
+            "modules": ["custom/expand", "tray"]
+        },
+
+    "group/expandVol": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 600,
+            "transition-to-left": true,
+            "click-to-reveal": false
+        },
+        "modules": ["custom/expandVol", "pulseaudio/slider"]
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span color='#ffc777'>󱅫</span>",
+            "none": "<span color='#0DB9D7'>󰂜</span>",
+            "dnd-notification": "<span color='#ffc777'>󰅸</span>",
+            "dnd-none": "<span color='#0DB9D7'>󰪑</span>",
+            "inhibited-notification": "<span color='#c53b53'>󰅸</span>",
+            "inhibited-none": "<span color='#0DB9D7'>󱏨</span>",
+            "dnd-inhibited-notification": "<span color='#c53b53'>󰵙</span>",
+            "dnd-inhibited-none": "<span color='#0DB9D7'>󰪑</span>"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "sleep 0.1 && swaync-client -t -sw",
+        "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+        "escape": true
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": "{icon}",
+        "format-icons": ["󰝦","󰪞","󰪟","󰪠","󰪡","󰪢","󰪣","󰪤","󰪥"]
+        },
+
+    "memory": {
+        "interval": 1,
+        "format": "{icon}",
+        "format-icons": ["󰝦","󰪞","󰪟","󰪠","󰪡","󰪢","󰪣","󰪤","󰪥"]
+    },
+
+    "custom/disk": {
+        "interval": 10,
+        "exec": "bash $HOME/.config/waybar/disk-percentage.sh 2> /dev/null",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": ["󰝦","󰪞","󰪟","󰪠","󰪡","󰪢","󰪣","󰪤","󰪥"]
+    },
+
+    "custom/check-wireguard": {
+        "interval": 5,
+        "exec": "bash $HOME/.config/waybar/wireguard-check.sh 2> /dev/null",
+        "return-type": "json",
+        "format": "{}"
+    },
+
+    "battery": {
+        "interval": 10,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        // Connected to AC
+        "format": "<span color='#0DB9D7'></span> {capacity}%", // Icon: bolt
+        // Not connected to AC
+        "format-discharging": "{icon} {capacity}%",
+        "format-plugged": "<span color='#0DB9D7'></span> {capacity}%",
+        "format-icons": [
+            "<span color='#c53b53'>󰁺</span>",
+            "<span color='#0DB9D7'>󰁻</span>",
+            "<span color='#0DB9D7'>󰁼</span>",
+            "<span color='#0DB9D7'>󰁽</span>",
+            "<span color='#0DB9D7'>󰁾</span>",
+            "<span color='#0DB9D7'>󰁿</span>",
+            "<span color='#0DB9D7'>󰁽</span>",
+            "<span color='#0DB9D7'>󰂀</span>",
+            "<span color='#0DB9D7'>󰂁</span>",
+            "<span color='#0DB9D7'>󰂂</span>",
+            "<span color='#0DB9D7'>󰁹</span>"
+        ],
+        "tooltip": true
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "󱎖",
+            "performance": "󰄯",
+            "balanced": "󱎖",
+            "power-saver": "󰄰"
+        }
+    },
+
+    "temperature": {
+      "critical-threshold": 110,
+      "interval": 2,
+      "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/",
+      "input-filename": "temp1_input",
+      "format": "{icon} {temperatureC}°C",
+      "format-icons": [
+          "<span color='#0DB9D7'></span>", // Icon: temperature-empty
+          "<span color='#0DB9D7'></span>", // Icon: temperature-quarter
+          "<span color='#0DB9D7'></span>", // Icon: temperature-half
+          "<span color='#0DB9D7'></span>", // Icon: temperature-three-quarters
+          "<span color='#c53b53'></span>"  // Icon: temperature-full
+      ],
+      "tooltip": true
+    },
+
+    "network": {
+        "tooltip": true,
+        "format-wifi": "{icon}",
+        "format-icons": [
+            "󰤫",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "rotate": 0,
+        "format-ethernet": "󰈀",
+        "tooltip-format-wifi": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "tooltip-format-ethernet": "Interface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "/usr/bin/nm-connection-editor",
+        "interval": 2
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{:%e %b %H:%M:%S}",
+        "interval": 1,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":   "<span color='#7aa2f7'><b>{}</b></span>",   /* blue */
+                "days":     "<span color='#9ece6a'><b>{}</b></span>",   /* green */
+                "weeks":    "<span color='#7dcfff'><b>W{}</b></span>",  /* cyan */
+                "weekdays": "<span color='#e0af68'><b>{}</b></span>",   /* yellow */
+                "today":    "<span color='#ff9e64'><b><u>{}</u></b></span>" /* orange */
+            }
+        },
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+
+    "pulseaudio": {
+        "format": "{volume}%",
+        "on-click": "pavucontrol"
+    }
+}]
