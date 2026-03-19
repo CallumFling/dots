@@ -1,6 +1,10 @@
 # dots
 A place for my hypr* linux setup dotfiles
 
+
+<img width="2560" height="1600" alt="2026-03-16-182603_hyprshot" src="https://github.com/user-attachments/assets/6308ab77-ad27-4aef-b537-3eeca4f1a8f1" />
+
+
 The dots are currently provided 'as-is'. Installation scripts and some tidy-up will happen soon (ish).
 
 ## Requirements
